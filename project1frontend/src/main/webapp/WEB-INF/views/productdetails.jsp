@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ include file="header.jsp" %>
+    
+     <%@page isELIgnored="false" %>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,8 +24,16 @@
 								Description</b>: ${product.productdescription }<br> <b>Price
 						</b>: ${product.price }<br> <b>Quantity </b>:${product.quantity }
 						</td>
-						<td><img
-							src='<c:url value="/resources/images/${product.id }.png"></c:url>' height="250px" width="250px" alt="NA">
+						<td>
+						
+						<img
+							alt='<c:url value="/resources/images/${product.id}.jpg"></c:url>'
+							src="<c:url value="/resources/images/${product.id}.jpg"></c:url>" height="250px" width="250px">
+						 
+						<%-- <img
+							alt="${pageContext.request.contextPath}/WEB-INF/resources/images/${product.id}.jpg"
+							src='<c:url value="${pageContext.request.contextPath}/WEB-INF/resources/images/${product.id}.jpg"></c:url>' height="250px" width="250px">
+							 --%>
 						</td>
 					</tr>
 				</table>

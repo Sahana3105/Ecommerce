@@ -59,6 +59,8 @@
                     </div>
                 </div>
             </div>
+            
+            
             <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left"></span>
                 <span class="sr-only">Previous</span>
@@ -70,5 +72,10 @@
         </div><!-- /.carousel -->
 
 </div>
+
+<br>
+<img src="<c:url value='/resources/images/p2.jpg'></c:url>" alt="<c:url value='/resources/images/9.jpg'></c:url>" height="300" width="300">
+            
+
 </body>
 </html>

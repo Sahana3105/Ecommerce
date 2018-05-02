@@ -26,7 +26,10 @@ import com.project.model.Product;
 import com.project.services.ProductService;
 
 @Controller
-public class ProductController {
+public class ProductController
+{
+	private String imgExtension = ".jpg";
+	
 	@Autowired
 private ProductService productService;
 	public ProductController(){
@@ -63,7 +66,7 @@ private ProductService productService;
 		String rootdirectory=request.getServletContext().getRealPath("/");
 		System.out.println("Root Directory " + rootdirectory);
 		//create a path
-		Path paths=Paths.get(rootdirectory+"/WEB-INF/resources/images/"+id+".png");
+		Path paths=Paths.get(rootdirectory+"/WEB-INF/resources/images/"+id+imgExtension);
 		if(Files.exists(paths)){
 			try {
 				Files.delete(paths);
@@ -110,8 +113,9 @@ private ProductService productService;
 			String rootdirectory=request.getServletContext().getRealPath("/");
 			System.out.println("Root Directory " + rootdirectory);
 			//create a path
-			Path paths=Paths.get(rootdirectory+"/WEB-INF/resources/images/"+product.getId()+".png");
-			
+			Path paths=Paths.get(rootdirectory+"/WEB-INF/resources/images/"+product.getId()+imgExtension);
+			System.out.println("Creating pic : "+rootdirectory+"/WEB-INF/resources/images/"+product.getId()+imgExtension);
+
 				//it throws checked exception
 				try {
 					prodImage.transferTo(new File(paths.toString()));
@@ -123,6 +127,10 @@ private ProductService productService;
 					e.printStackTrace();
 				}
 			
+		}
+		else {
+			System.out.println("Error creating pic");
+
 		}
 		return "redirect:/all/getproducts";
 	}
@@ -137,13 +145,16 @@ private ProductService productService;
 		productService.updateProduct(product);
 		
 		MultipartFile prodImage=product.getImage();//image uploaded in the productform.jsp
-		if(prodImage!=null && !prodImage.isEmpty()){
+		if(prodImage!=null && !prodImage.isEmpty())
+		{
 			//how to get rootdirectory
 			String rootdirectory=request.getServletContext().getRealPath("/");
 			System.out.println("Root Directory " + rootdirectory);
 			//create a path
-			Path paths=Paths.get(rootdirectory+"/WEB-INF/resources/images/"+product.getId()+".png");
+			Path paths=Paths.get(rootdirectory+"/WEB-INF/resources/images/"+product.getId()+imgExtension);
 			
+			System.out.println("Creating pic : "+rootdirectory+"/WEB-INF/resources/images/"+product.getId()+imgExtension);
+
 				//it throws checked exception
 				try {
 					prodImage.transferTo(new File(paths.toString()));
@@ -155,6 +166,9 @@ private ProductService productService;
 					e.printStackTrace();
 				}
 			
+		}
+		else {
+			System.out.println("Error creating pic");
 		}
 		return "redirect:/all/getproducts";
 	}

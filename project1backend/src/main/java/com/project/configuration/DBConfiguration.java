@@ -4,8 +4,15 @@ import org.springframework.context.annotation.Configuration;
 
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.project.model.Authorities;
+import com.project.model.BillingAddress;
+import com.project.model.Cart;
+import com.project.model.CartItem;
 import com.project.model.Category;
+import com.project.model.Customer;
 import com.project.model.Product;
+import com.project.model.ShippingAddress;
+import com.project.model.User;
 
 import java.util.Properties;
 
@@ -50,7 +57,7 @@ public class DBConfiguration {
 			lsf.addProperties(hibernateProperties);
 			//An array of Class objects of all the entities
 			//Map all entities to relational table
-			Class classes[]=new Class[]{Product.class, Category.class };
+			Class classes[]=new Class[]{Product.class, Category.class, Authorities.class, BillingAddress.class, Cart.class ,Customer.class, ShippingAddress.class, CartItem.class, User.class};
 			//localsesionfactorybuilder -> sessionfactory -> map all entities with relation table
 			System.out.println("SessionFactory bean " + lsf);
 		    return lsf.addAnnotatedClasses(classes).buildSessionFactory();

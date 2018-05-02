@@ -9,9 +9,12 @@
        http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
+              
        <!-- for auto-detecting the annotations @RequestMapping -->
        <!-- enable spring mvc -->
        <mvc:annotation-driven></mvc:annotation-driven>
+       
+       <mvc:resources location="/WEB-INF/resources/" mapping="/resources/**"></mvc:resources>
        
        <!-- @Componentscan -->
        <context:component-scan base-package="com.project"></context:component-scan>
@@ -33,5 +36,5 @@
        <img src='<c:url value="/resources/images/niit.jpg">'>
                    /WEB-INF/resources/images/niit.jpg
        -->
-       <mvc:resources location="/WEB-INF/resources/" mapping="/resources/**"></mvc:resources>
+       
 </beans>

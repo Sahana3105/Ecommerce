@@ -3,6 +3,7 @@
     <%@page isELIgnored="false" %>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
      <%@ taglib uri= "http://www.springframework.org/tags/form" prefix="form" %>
+ <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,8 +11,10 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="table.css">
-<link rel="stylesheet" href="navbar.css">
+<link rel="stylesheet" href="http://localhost:8080/project1frontend/resources/css/table.css">
+<link rel="stylesheet" href="http://localhost:8080/project1frontend/resources/css/navbar.css">
+
+ 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script
@@ -48,8 +51,6 @@
 				controller returns ModelAndView [model is List<Product>,view is productlist]
 				/WEB-INF/views/productlist.jsp
 				 -->
-				<li><a href='<c:url value="/all/getproducts"></c:url>'>Browse All Products</a></li>
-				<li><a href='<c:url value="/admin/getproductform"></c:url>'>Add Product</a></li>
 				<li class="dropdown">
 			<a href="" class="dropdown-toggle" data-toggle="dropdown">
                      Select by Category<b class="caret"></b></a>
@@ -58,13 +59,27 @@
 					<!-- Request parameter
 					parameter name is 'searchCondition' -->
 					   <a href='<c:url value="/all/searchbycategory?searchCondition=paper"></c:url>'>paper</a>
-					   <a href='<c:url value="/all/searchbycategory?searchCondition=books"></c:url>'>books</a>
-					   <a href='<c:url value="/all/searchbycategory?searchCondition=pens"></c:url>'>pens</a>
+					   <a href='<c:url value="/all/searchbycategory?searchCondition=book"></c:url>'>books</a>
+					   <a href='<c:url value="/all/searchbycategory?searchCondition=pen"></c:url>'>pens</a>
 						   <a href='<c:url value="/all/searchbycategory?searchCondition=All"></c:url>'>All</a>
                     </li>
 			</ul>
 			</li>
-			</ul>
+			<li><a href='<c:url value="/all/getproducts"></c:url>'>Browse All Products</a></li>
+			<security:authorize access="hasRole('ROLE_ADMIN')">
+				<li><a href='<c:url value="/admin/getproductform"></c:url>'>Add Product</a></li>
+			</security:authorize>
+			
+			<c:if test="${pageContext.request.userPrincipal.name==null }">
+				<li><a href='<c:url value="/all/registrationform"></c:url>'>Sign Up</a></li>
+				<li><a href='<c:url value="/login"></c:url>'>Sign In</a></li>
+			</c:if>
+			
+			<c:if test="${pageContext.request.userPrincipal.name!=null }">
+				<li><a href='<c:url value="/j_spring_security_logout"></c:url>'>logout</a></li>
+			</c:if>
+			
+			</ul> 
 			</div>
 		</div>
 	</nav>
